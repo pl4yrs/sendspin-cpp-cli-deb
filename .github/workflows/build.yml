@@ -9,7 +9,7 @@ on:
 jobs:
   deb-arm64:
     name: deb-arm64
-    runs-on: ubuntu-26.04-arm64
+    runs-on: ubuntu-24.04-arm64
     container:
       image: debian:trixie
     steps:
