@@ -51,4 +51,5 @@ jobs:
         with:
           name: sendspin-cli-arm64-deb
           path: dist/
-          if-no-files-found: error
+      - name: Display structure of downloaded files
+        run: ls -R dist/
