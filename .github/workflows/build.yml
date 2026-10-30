@@ -1,0 +1,27 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_requests:
+
+jobs:
+  deb-arm64:
+    name: deb-arm64
+    runs-on: ubuntu-26.04-arm64
+    container:
+      image: debian:trixie
+    steps:
+      - name: Install build dependencies
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            build-essential cmake git pkg-config ca-certificates curl dpkg \
+            libasound2-dev portaudio19-dev libpulse-dev libpipewire-0.3-dev \
+            libavahi-compat-libdnssd-dev
+
+      - name: Check out repo
+        uses: actions/checkout@v5
+
+      - name: Build the deb package
+        run: scripts/build.sh
