@@ -61,6 +61,12 @@ ARCH=arm64
 # Build from sources / tag
 build_from_source
 
+# Create default conf file
+CONFFILE="sendspin-cli.conf"
+TARGETDIR="stage/etc"
+TEMPLATE="stage/usr/share/doc/sendspin-cli/${CONFFILE}.example"
+[ -f "${TEMPLATE}" ] && mkdir -p ${TARGETDIR} && install -m 0644 ${TEMPLATE} ${TARGETDIR}/${CONFFILE}
+
 # Handled Deb metadata
 INSTALLED_SIZE=$(du -sk stage | cut -f1)
 mkdir -p stage/DEBIAN
@@ -69,7 +75,7 @@ sed -e "s/@VERSION@/$VERSION/" -e "s/@INSTALLED_SIZE@/${INSTALLED_SIZE}/" \
 for script in postinst prerm postrm; do
     [ -f "debian/$script" ] && install -m 0755 "debian/$script" "stage/DEBIAN/$script"
 done
-for file in changelog copyright; do
+for file in conffiles changelog copyright; do
     [ -f "debian/$file" ] && install -m 0644 "debian/$file" "stage/DEBIAN/$file"
 done
 
