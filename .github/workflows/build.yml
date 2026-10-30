@@ -37,6 +37,7 @@ jobs:
     #if: ${{ startsWith(github.ref, 'refs/tags/') }}
     name: release
     runs-on: ubuntu-26.04-arm
+    needs: deb-arm64
     container:
       image: debian:trixie
     steps:
