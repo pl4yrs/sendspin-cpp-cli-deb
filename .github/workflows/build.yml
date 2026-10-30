@@ -65,7 +65,7 @@ jobs:
           gh release create "$GITHUB_REF_NAME" \
           --repo "$GITHUB_REPOSITORY" \
           --title "sendspin-cli $GITHUB_REF_NAME" \
-          --notes-from-tag \
+          --notes-start-tag "$GITHUB_REF_NAME" \
           --draft \
           --prerelease \
           --verify-tag \
