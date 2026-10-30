@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    remove|purge)
+        systemctl daemon-reload 2>/dev/null || true
+        # /var/lib/sendspin-cli (identity + pairings) is deliberately left in
+        # place even on purge to avoid having to re-pair the player in case of reinstall.
+        ;;
+esac
+
+exit 0

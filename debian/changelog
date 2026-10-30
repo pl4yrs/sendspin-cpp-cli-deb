@@ -1,0 +1,6 @@
+# Packaging changelog
+
+## 0.4.0-1
+
+- First release: sendspin-cli v0.4.0 (Sendspin 1.0.0-rc1) for arm64,
+  built from source in a debian:trixie arm64 container. Trixie only.

@@ -1,0 +1,12 @@
+Package: sendspin-cli
+Version: @VERSION@
+Architecture: arm64
+Maintainer: Sergio Visinoni <piffio@piffio.org>
+Depends: libasound2t64, libportaudio2, libpulse0, libpipewire-0.3-0t64, libavahi-compat-libdnssd1
+Build-depends: build-essential, cmake, git, pkg-config, dpkg, libasound2-dev, portaudio19-dev, libpulse-dev, libpipewire-0.3-dev, libavahi-compat-libdnssd-dev
+Recommends: avahi-daemon
+Section: sound
+Priority: optional
+Installed-Size: @INSTALLED_SIZE@
+Description: Sendspin 1.0 synchronized audio player (headless CLI).
+ Packaged for pl4y.rs from upstream Sendspin/sendspin-cpp-cli.

@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    configure)
+        # Create the sendspin-cli service account (with audio group) if missing.
+        systemd-sysusers sendspin-cli.conf 2>/dev/null || true
+        systemctl daemon-reload 2>/dev/null || true
+        ;;
+esac
+exit 0
