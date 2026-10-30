@@ -19,7 +19,7 @@ jobs:
           apt-get install -y --no-install-recommends \
             build-essential cmake git pkg-config ca-certificates curl dpkg \
             libasound2-dev portaudio19-dev libpulse-dev libpipewire-0.3-dev \
-            libavahi-compat-libdnssd-dev gh
+            libavahi-compat-libdnssd-dev
 
       - name: Check out repo
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -48,6 +48,11 @@ jobs:
     container:
       image: debian:trixie
     steps:
+      - name: Install gh
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends gh
+
       - name: Fetch the artifact
         uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
