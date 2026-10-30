@@ -19,7 +19,7 @@ jobs:
           apt-get install -y --no-install-recommends \
             build-essential cmake git pkg-config ca-certificates curl dpkg \
             libasound2-dev portaudio19-dev libpulse-dev libpipewire-0.3-dev \
-            libavahi-compat-libdnssd-dev
+            libavahi-compat-libdnssd-dev gh
 
       - name: Check out repo
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
