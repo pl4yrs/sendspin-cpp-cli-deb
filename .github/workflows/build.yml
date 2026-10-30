@@ -53,5 +53,18 @@ jobs:
         with:
           name: sendspin-cli-arm64-deb
           path: dist/
-      - name: Display structure of downloaded files
-        run: ls -R dist/
+      - name: Create Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          run: |
+            gh release create "$GITHUB_REF_NAME" \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "sendspin-cli $GITHUB_REF_NAME" \
+            --notes-from-tag \
+            --draft \
+            --prerelease \
+            --verify-tag \
+            dist/*.deb dist/SHA256SUMS
