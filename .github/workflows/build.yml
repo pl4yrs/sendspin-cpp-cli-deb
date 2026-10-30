@@ -26,3 +26,10 @@ jobs:
 
       - name: Build the deb package
         run: scripts/build.sh
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sendspin-cli-arm64-deb
+          path: dist/*.deb
+          if-no-files-found: error
