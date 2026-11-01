@@ -61,6 +61,7 @@ jobs:
       - name: Create Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REF_NAME: ${{ github.ref_name }}
         run: |
           gh release create "$GITHUB_REF_NAME" \
           --repo "$GITHUB_REPOSITORY" \
@@ -68,5 +69,4 @@ jobs:
           --notes-start-tag "$GITHUB_REF_NAME" \
           --draft \
           --prerelease \
-          --verify-tag \
           dist/*.deb dist/SHA256SUMS
