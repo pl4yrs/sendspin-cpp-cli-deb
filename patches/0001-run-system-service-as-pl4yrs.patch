@@ -1,0 +1,29 @@
+diff --git a/packaging/sendspin-cli.service.in b/packaging/sendspin-cli.service.in
+index 7f17550..30a3515 100644
+--- a/packaging/sendspin-cli.service.in
++++ b/packaging/sendspin-cli.service.in
+@@ -19,9 +19,9 @@ After=avahi-daemon.service
+ # Foreground; journald captures stderr.
+ Type=simple
+ 
+-# Created by lib/sysusers.d/sendspin-cli.conf, which also adds the audio group membership.
++# The pl4yrs device account; lib/sysusers.d/sendspin-cli.conf adds it to audio.
+ # Not DynamicUser=: it gets no audio group.
+-User=sendspin-cli
++User=pl4yrs
+ 
+ # Hardening, each directive verified against a running player.
+ NoNewPrivileges=yes
+diff --git a/packaging/sendspin-cli.sysusers.conf b/packaging/sendspin-cli.sysusers.conf
+index 9455d9a..674e2c2 100644
+--- a/packaging/sendspin-cli.sysusers.conf
++++ b/packaging/sendspin-cli.sysusers.conf
+@@ -1,4 +1,4 @@
+-# The account sendspin-cli.service runs as; run `systemd-sysusers` once after installing.
+-# `m` adds it to audio, which /dev/snd (root:audio 0660) needs.
+-u sendspin-cli - "Sendspin audio player" - -
+-m sendspin-cli audio
++# Adds pl4yrs, the account sendspin-cli.service runs as, to audio (/dev/snd is root:audio 0660).
++# `m` also creates pl4yrs as a system user if it does not exist yet.
++u pl4yrs - "Pl4yrs media system" - -
++m pl4yrs audio
