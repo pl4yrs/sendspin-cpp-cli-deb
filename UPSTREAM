@@ -1,2 +1,3 @@
-# Upstream pinned tag. Updated via bump_upstream.sh
-tag=v0.4.0
+# Upstream pin. Updated via bump_upstream.sh
+# tag           = Sendspin/sendspin-cpp-cli release tag to build
+tag=v1.0.1

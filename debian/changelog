@@ -1,5 +1,9 @@
 # Packaging changelog
 
+## 1.0.1-1
+
+- Upstream bump: v0.4.0 -> v1.0.1.
+
 ## 0.4.0-1
 
 - First release: sendspin-cli v0.4.0 (Sendspin 1.0.0-rc1) for arm64,
