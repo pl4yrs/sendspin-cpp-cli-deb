@@ -10,6 +10,7 @@ UPSTREAM_FILE="$REPO_ROOT/UPSTREAM"
 UPSTREAM_REPO="https://github.com/Sendspin/sendspin-cpp-cli"
 STAGE="$REPO_ROOT/stage"
 WORK="$REPO_ROOT/work"
+PATCHES="$REPO_ROOT/patches"
 
 upstream_tag() {
     sed -n 's/^tag=//p' "$UPSTREAM_FILE" | tr -d '[:space:]'
@@ -21,12 +22,24 @@ usage() {
     echo -ne "\t--debrev N\t\tDebian Revision to be used for the package.\n\n"
 }
 
+# Apply local patches (patches/*.patch, lexical order) on top of the upstream checkout.
+apply_patches() {
+    local p
+    for p in "$PATCHES"/*.patch; do
+        [ -e "$p" ] || continue
+        echo "Applying $(basename "$p")"
+        git -C "$WORK/src" apply --verbose "$p"
+    done
+}
+
 build_from_source() {
     rm -rf "$WORK"
     mkdir -p "$WORK"
     echo "Cloning Sendspin/sendspin-cpp-cli @ $TAG"
     git clone --depth 1 --branch "$TAG" \
         ${UPSTREAM_REPO} "$WORK/src"
+
+    apply_patches
 
     echo "Configuring (prefix=/usr)"
     cmake -B "$WORK/src/build" -S "$WORK/src" \

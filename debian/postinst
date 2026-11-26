@@ -3,9 +3,28 @@ set -e
 
 case "$1" in
     configure)
-        # Create the sendspin-cli service account (with audio group) if missing.
+        # Stop a running service first: userdel refuses an account with live processes.
+        WAS_ACTIVE=0
+        if systemctl is-active --quiet sendspin-cli.service 2>/dev/null; then
+            WAS_ACTIVE=1
+            systemctl stop sendspin-cli.service 2>/dev/null || true
+        fi
+
+        # Add pl4yrs (the service account) to the audio group, creating it if missing.
         systemd-sysusers sendspin-cli.conf 2>/dev/null || true
+
+        # Drop the legacy sendspin-cli account from earlier packages.
+        if getent passwd sendspin-cli >/dev/null 2>&1; then
+            userdel sendspin-cli 2>/dev/null || true
+        fi
+        if getent group sendspin-cli >/dev/null 2>&1; then
+            groupdel sendspin-cli 2>/dev/null || true
+        fi
+
         systemctl daemon-reload 2>/dev/null || true
+        if [ "$WAS_ACTIVE" = 1 ]; then
+            systemctl start sendspin-cli.service 2>/dev/null || true
+        fi
         ;;
 esac
 exit 0

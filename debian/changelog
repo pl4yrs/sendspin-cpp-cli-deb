@@ -1,5 +1,12 @@
 # Packaging changelog
 
+## 1.0.1-1
+
+- Upstream bump: v0.4.0 -> v1.0.1.
+- System service now runs as `pl4yrs` (local patch in `patches/`); sysusers
+  only adds `pl4yrs` to the `audio` group.
+- postinst removes the legacy `sendspin-cli` account on upgrade.
+
 ## 0.4.0-1
 
 - First release: sendspin-cli v0.4.0 (Sendspin 1.0.0-rc1) for arm64,
